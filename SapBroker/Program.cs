@@ -1,0 +1,34 @@
+using SapBroker;
+using SapBroker.Services;
+using Serilog;
+
+var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog();
+
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<ISapService, SapEmulator>();
+builder.Services.AddScoped<IXPacsService, XPacsService>();
+
+var settings = new Settings();
+builder.Configuration.Bind(settings);
+builder.Services.AddSingleton(settings);
+
+var app = builder.Build();
+
+var loggerConfig = new LoggerConfiguration();
+loggerConfig = loggerConfig.WriteTo.Console();
+Log.Logger = loggerConfig.CreateLogger();
+
+app.MapGet("/api/order", (ISapService sapService) =>
+{
+    var orders = sapService.RetrieveOrders();
+    return orders;
+});
+
+app.MapPost("/api/order/transfer", async (ISapService sapService, IXPacsService xpacsService) =>
+{
+    var orders = sapService.RetrieveOrders();
+    await xpacsService.SendOrders(orders);
+});
+
+app.Run();

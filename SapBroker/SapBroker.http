@@ -1,0 +1,3 @@
+@SapBroker_HostAddress = http://localhost:5004
+
+POST {{SapBroker_HostAddress}}/api/order/transfer
