@@ -1,0 +1,4 @@
+@SapBroker_HostAddress = http://localhost:5004
+
+### Get orders
+GET {{SapBroker_HostAddress}}/api/order
