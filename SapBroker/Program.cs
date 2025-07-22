@@ -5,13 +5,13 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog();
 
-builder.Services.AddHttpClient();
-builder.Services.AddScoped<ISapService, SapEmulator>();
-builder.Services.AddScoped<IXPacsService, XPacsService>();
-
 var settings = new Settings();
 builder.Configuration.Bind(settings);
 builder.Services.AddSingleton(settings);
+
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<ISapService, SapEmulator>();
+builder.Services.AddScoped<IXPacsService, XPacsService>();
 
 var app = builder.Build();
 
