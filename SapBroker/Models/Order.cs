@@ -24,6 +24,7 @@ class Order
     [JsonIgnore]
     public string InternalModality { get; set; }
 
+    [SapIgnore]
     public string Modality => InternalModality switch
     {
         "RT" => "SC",
@@ -39,6 +40,7 @@ class Order
     [JsonIgnore]
     public int FilmSeries { get; set; }
 
+    [SapIgnore]
     public string AccessionNumber => FilmSeries > 1 ? $"{FilmId}/{FilmSeries:d3}" : FilmId;
 
     [SapName("INSP_SHOP")]
@@ -52,5 +54,6 @@ class Order
     [JsonIgnore]
     public TimeSpan ScheduledTime { get; set; }
 
+    [SapIgnore]
     public DateTime ScheduledDateTime => ScheduledDate + ScheduledTime;
 }
