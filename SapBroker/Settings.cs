@@ -11,6 +11,8 @@ class Settings
         public string ConnectionString { get; set; }
 
         public int Days { get; set; }
+
+        public bool Emulator { get; set; }
     }
 
     public class XPacsSettings

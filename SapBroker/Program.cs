@@ -10,7 +10,14 @@ builder.Configuration.Bind(settings);
 builder.Services.AddSingleton(settings);
 
 builder.Services.AddHttpClient();
-builder.Services.AddScoped<ISapService, SapEmulator>();
+if (settings.Sap.Emulator)
+{
+    builder.Services.AddScoped<ISapService, SapEmulator>();
+}
+else
+{
+    builder.Services.AddScoped<ISapService, SapService>();
+}
 builder.Services.AddScoped<IXPacsService, XPacsService>();
 
 var app = builder.Build();
