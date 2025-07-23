@@ -17,7 +17,7 @@ class XPacsService : IDisposable, IXPacsService
 
     public void Dispose() => m_Client?.Dispose();
 
-    public async Task SendOrders(Order[] orders)
+    public async Task SendOrders(IEnumerable<Order> orders)
     {
         foreach (var order in orders)
         {

@@ -17,7 +17,7 @@ class SapService : ISapService, IDisposable
 
     public void Dispose() => m_Connection?.Dispose();
 
-    public Order[] RetrieveOrders()
+    public IEnumerable<Order> RetrieveOrders()
     {
         using var func = m_Connection.CreateFunction("Z_QMSA_12_0015_GET");
         var today = DateTime.Today;

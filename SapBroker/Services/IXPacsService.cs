@@ -4,5 +4,5 @@ namespace SapBroker.Services;
 
 interface IXPacsService
 {
-    Task SendOrders(Order[] orders);
+    Task SendOrders(IEnumerable<Order> orders);
 }

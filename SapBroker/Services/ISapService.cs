@@ -4,5 +4,5 @@ namespace SapBroker.Services;
 
 interface ISapService
 {
-    Order[] RetrieveOrders();
+    IEnumerable<Order> RetrieveOrders();
 }
