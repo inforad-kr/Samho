@@ -4,21 +4,26 @@ namespace SapBroker.Services;
 
 class SapEmulator : ISapService
 {
-    public Order[] RetrieveOrders() =>
-    [
-        new()
+    public IEnumerable<Order> RetrieveOrders()
+    {
+        for (var i = 0; i < 200; ++i)
         {
-            ComponentName = "Test",
-            ComponentId = "111",
-            RequestedJobId = "J423",
-            RequestedJobDescription = "D352867",
-            StudyId = "P6256",
-            InternalModality = "RT",
-            FilmId = "12345",
-            FilmSeries = 1,
-            ComponentOwnerName = "Samho",
-            ScheduledDate = DateTime.Today,
-            ScheduledTime = TimeSpan.FromHours(9)
+            var filmId = $"{i + 1:d3}";
+            var order = new Order
+            {
+                ComponentName = "Test",
+                ComponentId = "111",
+                RequestedJobId = $"J{filmId}",
+                RequestedJobDescription = $"D{filmId}",
+                StudyId = $"P{filmId}",
+                InternalModality = "RT",
+                FilmId = filmId,
+                FilmSeries = 1,
+                ComponentOwnerName = "Samho",
+                ScheduledDate = DateTime.Today,
+                ScheduledTime = TimeSpan.FromMinutes(i + 1)
+            };
+            yield return order;
         }
-    ];
+    }
 }
