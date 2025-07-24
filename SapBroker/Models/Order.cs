@@ -5,8 +5,8 @@ namespace SapBroker.Models;
 
 class Order
 {
-    [SapName("MANDT")]
-    public string ComponentName { get; set; }
+    [SapIgnore]
+    public string ComponentName => "?";
 
     [SapName("PSPID")]
     public string ComponentId { get; set; }

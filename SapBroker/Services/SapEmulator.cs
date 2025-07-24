@@ -11,7 +11,6 @@ class SapEmulator : ISapService
             var filmId = $"{i + 1:d3}";
             var order = new Order
             {
-                ComponentName = "Test",
                 ComponentId = "111",
                 RequestedJobId = $"J{filmId}",
                 RequestedJobDescription = $"D{filmId}",
