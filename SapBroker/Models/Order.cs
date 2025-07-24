@@ -43,14 +43,17 @@ class Order
     [SapIgnore]
     public string AccessionNumber => FilmSeries > 1 ? $"{FilmId}/{FilmSeries:d3}" : FilmId;
 
+    [SapName("FIX_DAY")]
+    public DateTime ComponentManufacturingDate { get; set; }
+
     [SapName("INSP_SHOP")]
     public string ComponentOwnerName { get; set; }
 
-    [SapName("FIX_DAY")]
+    [SapName("REAL_DAY")]
     [JsonIgnore]
     public DateTime ScheduledDate { get; set; }
 
-    [SapName("FIX_TIME")]
+    [SapName("REAL_TIME")]
     [JsonIgnore]
     public TimeSpan ScheduledTime { get; set; }
 
