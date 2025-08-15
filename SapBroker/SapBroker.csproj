@@ -3,6 +3,10 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Copyright>Copyright © 2025</Copyright>
+    <Company>InfoRAD</Company>
+    <Authors>Pavel Zaytsev</Authors>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
