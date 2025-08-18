@@ -44,7 +44,7 @@ class Order
     public int FilmSeries { get; set; }
 
     [SapIgnore]
-    public string AccessionNumber => FilmSeries > 1 ? $"{FilmId}/{FilmSeries:d3}" : FilmId;
+    public string AccessionNumber => $"{FilmId}_{FilmSeries:d3}";
 
     [SapName("FIX_DAY")]
     public DateTime ComponentManufacturingDate { get; set; }
