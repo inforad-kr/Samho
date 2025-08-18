@@ -17,10 +17,10 @@ class Order
     [SapName("DWGNO")]
     public string RequestedJobDescription { get; set; }
 
-    [SapName("PCSNO")]
+    [SapName("REP_NO")]
     public string StudyId { get; set; }
 
-    [SapName("REP_NO")]
+    [SapName("PCSNO")]
     public string StudyDescription { get; set; }
 
     [SapName("INSPITM")]
