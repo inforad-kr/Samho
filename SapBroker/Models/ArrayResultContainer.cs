@@ -2,8 +2,8 @@
 
 namespace SapBroker.Models;
 
-class ResultContainer<T>
+class ArrayResultContainer<T>
 {
     [SapName("ET_RESULT")]
-    public T Result { get; set; }
+    public T[] Result { get; set; }
 }

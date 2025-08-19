@@ -4,6 +4,6 @@ namespace ImageBroker.Models;
 
 class ResultContainer<T>
 {
-    [SapName("ET_RESULT")]
+    [SapName("E_RESULT")]
     public T Result { get; set; }
 }

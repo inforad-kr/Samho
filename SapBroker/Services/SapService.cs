@@ -24,7 +24,7 @@ class SapService : ISapService, IDisposable
             StartDate = today.AddDays(-days).ToString("yyyyMMdd"),
             EndDate = today.ToString("yyyyMMdd")
         };
-        var result = func.Invoke<ResultContainer<Order[]>>(parameters);
+        var result = func.Invoke<ArrayResultContainer<Order>>(parameters);
         return result.Result;
     }
 }
