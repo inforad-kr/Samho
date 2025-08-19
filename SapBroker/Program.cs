@@ -9,7 +9,7 @@ var settings = new Settings();
 builder.Configuration.Bind(settings);
 builder.Services.AddSingleton(settings);
 
-if (settings.Emulator)
+if (settings.SapEmulator)
 {
     builder.Services.AddScoped<ISapService, SapEmulator>();
 }
