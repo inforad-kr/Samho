@@ -1,0 +1,11 @@
+@ImageBroker_HostAddress = http://localhost:5005
+
+### Upload study images
+POST {{ImageBroker_HostAddress}}/api/study
+Content-Type: application/json
+
+{
+  "ComponentId": "",
+  "StudyId": "",
+  "AccessionNumber": ""
+}
