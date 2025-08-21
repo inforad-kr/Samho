@@ -8,10 +8,11 @@ class UploadService(ISapService sapService, IHttpClientFactory httpClientFactory
 {
     readonly HttpClient m_PacsClient = httpClientFactory.CreateClient("Pacs");
 
-    public async Task UploadImages(StudyRef studyRef)
+    public async Task<int> UploadImages(StudyRef studyRef)
     {
         var study = new Study(studyRef.ShipNumber, studyRef.ReportNumber, studyRef.FilmId_Series);
         var images = await GetImages(study);
+        int fileCount = 0;
         foreach (var image in images)
         {
             var files = await GetFiles(image);
@@ -21,8 +22,10 @@ class UploadService(ISapService sapService, IHttpClientFactory httpClientFactory
                 await UploadFile(study, image, false, data);
                 data = await GetFileData(file, true);
                 await UploadFile(study, image, true, data);
+                ++fileCount;
             }
         }
+        return fileCount;
     }
 
     private async Task<Image[]> GetImages(Study study) =>
