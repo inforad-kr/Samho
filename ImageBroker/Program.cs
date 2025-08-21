@@ -32,6 +32,8 @@ var loggerConfig = new LoggerConfiguration();
 loggerConfig = loggerConfig.WriteTo.Console();
 Log.Logger = loggerConfig.CreateLogger();
 
+app.MapGet("/", () => "Image Broker is running...");
+
 app.MapPost("/api/study", async (UploadService uploadService, StudyRef studyRef) =>
 {
     await uploadService.UploadImages(studyRef);
