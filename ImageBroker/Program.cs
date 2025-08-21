@@ -32,9 +32,9 @@ var loggerConfig = new LoggerConfiguration();
 loggerConfig = loggerConfig.WriteTo.Console();
 Log.Logger = loggerConfig.CreateLogger();
 
-app.MapPost("/api/study", async (UploadService uploadService, Study study) =>
+app.MapPost("/api/study", async (UploadService uploadService, StudyRef studyRef) =>
 {
-    await uploadService.UploadImages(study);
+    await uploadService.UploadImages(studyRef);
 });
 
 app.Run();

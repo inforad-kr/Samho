@@ -8,8 +8,9 @@ class UploadService(ISapService sapService, IHttpClientFactory httpClientFactory
 {
     readonly HttpClient m_PacsClient = httpClientFactory.CreateClient("Pacs");
 
-    public async Task UploadImages(Study study)
+    public async Task UploadImages(StudyRef studyRef)
     {
+        var study = new Study(studyRef.ShipNumber, studyRef.ReportNumber, studyRef.FilmId_Series);
         var images = await GetImages(study);
         foreach (var image in images)
         {
