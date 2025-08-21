@@ -56,11 +56,11 @@ class UploadService(ISapService sapService, IHttpClientFactory httpClientFactory
 
         var fileParameters = new FileParameters
         {
-            ComponentId = study.ComponentId,
-            StudyId = study.StudyId,
-            AccessionNumber = study.AccessionNumber[4..],
-            SeriesDescription = image.SeriesDescription,
-            ProtocolName = image.ProtocolName,
+            ShipNumber = study.ComponentId,
+            ReportNumber = study.StudyId,
+            FilmId_Series = study.AccessionNumber[4..],
+            Location = image.SeriesDescription,
+            VerificationCode = image.ProtocolName,
             FileName = fileName
         };
         sapService.NotifyFile(fileParameters);

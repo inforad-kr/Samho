@@ -9,12 +9,12 @@ class SapEmulator : ISapService
     {
         Log.Information("Notify SAP about file {Parameters}", new
         {
-            parameters.ComponentId,
-            parameters.StudyId,
+            parameters.ShipNumber,
+            parameters.ReportNumber,
             parameters.FilmId,
             parameters.FilmSeries,
-            parameters.SeriesDescription,
-            parameters.ProtocolName,
+            parameters.Location,
+            parameters.VerificationCode,
             parameters.FileName
         });
     }

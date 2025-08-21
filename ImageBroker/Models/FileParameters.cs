@@ -5,25 +5,25 @@ namespace ImageBroker.Models;
 class FileParameters
 {
     [SapName("I_PSPID")]
-    public string ComponentId { get; set; }
+    public string ShipNumber { get; set; }
 
     [SapName("I_REP_NO")]
-    public string StudyId { get; set; }
+    public string ReportNumber { get; set; }
 
     [SapIgnore]
-    public string AccessionNumber { get; set; }
+    public string FilmId_Series { get; set; }
 
     [SapName("I_FILMID")]
-    public string FilmId => AccessionNumber[..^4];
+    public string FilmId => FilmId_Series[..^4];
 
     [SapName("I_SER")]
-    public int FilmSeries => int.Parse(AccessionNumber[^3..]);
+    public int FilmSeries => int.Parse(FilmId_Series[^3..]);
 
     [SapName("I_LOC")]
-    public string SeriesDescription { get; set; }
+    public string Location { get; set; }
 
     [SapName("I_VCODE")]
-    public string ProtocolName { get; set; }
+    public string VerificationCode { get; set; }
 
     [SapName("I_FNAME")]
     public string FileName { get; set; }
