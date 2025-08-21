@@ -58,7 +58,7 @@ class UploadService(ISapService sapService, IHttpClientFactory httpClientFactory
         {
             ComponentId = study.ComponentId,
             StudyId = study.StudyId,
-            AccessionNumber = study.AccessionNumber,
+            AccessionNumber = study.AccessionNumber[4..],
             SeriesDescription = image.SeriesDescription,
             ProtocolName = image.ProtocolName,
             FileName = fileName
