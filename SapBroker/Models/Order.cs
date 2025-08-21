@@ -54,12 +54,12 @@ class Order
 
     [SapName("REAL_DAY")]
     [JsonIgnore]
-    public DateTime ScheduledDate { get; set; }
+    public DateTime StudyDate { get; set; }
 
     [SapName("REAL_TIME")]
     [JsonIgnore]
-    public TimeSpan ScheduledTime { get; set; }
+    public TimeSpan StudyTime { get; set; }
 
     [SapIgnore]
-    public DateTime ScheduledDateTime => ScheduledDate + ScheduledTime;
+    public DateTime StudyDateTime => StudyDate + StudyTime;
 }

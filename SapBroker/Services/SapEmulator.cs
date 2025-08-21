@@ -21,8 +21,8 @@ class SapEmulator : ISapService
                 FilmSeries = 1,
                 ComponentManufacturingDate = DateTime.Today.AddYears(-1),
                 ComponentOwnerName = "Samho",
-                ScheduledDate = DateTime.Today,
-                ScheduledTime = TimeSpan.FromMinutes(i + 1)
+                StudyDate = DateTime.Today,
+                StudyTime = TimeSpan.FromMinutes(i + 1)
             };
             yield return order;
         }
