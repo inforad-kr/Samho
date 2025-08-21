@@ -45,9 +45,9 @@ class UploadService(ISapService sapService, IHttpClientFactory httpClientFactory
         var fileName = $"{study.ComponentId}_{study.AccessionNumber}_{image.SeriesDescription}.{fileExtension}";
         var filePath = $"{folderPath}/{fileName}";
 
-        var created = await ftpClient.CreateDirectory(folderPath);
-        if (created)
+        if (!await ftpClient.DirectoryExists(folderPath))
         {
+            await ftpClient.CreateDirectory(folderPath);
             Log.Information("Directory {FolderPath} created by FTP", folderPath);
         }
         using var dataStream = new MemoryStream(data);
