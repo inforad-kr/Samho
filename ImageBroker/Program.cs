@@ -40,7 +40,7 @@ app.MapPost("/api/study", async (UploadService uploadService, StudyRef studyRef)
     {
         return Results.Ok(await uploadService.UploadImages(studyRef));
     }
-    return Results.BadRequest("Empty parameter");
+    return Results.BadRequest("Invalid parameters");
 });
 
 app.Run();
