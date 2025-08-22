@@ -36,7 +36,7 @@ app.MapGet("/", () => "Image Broker is running...");
 
 app.MapPost("/api/study", async (UploadService uploadService, StudyRef studyRef) =>
 {
-    if (studyRef?.IsValid == true)
+    if (studyRef.IsValid)
     {
         return Results.Ok(await uploadService.UploadImages(studyRef));
     }
