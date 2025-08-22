@@ -1,6 +1,6 @@
 ﻿using SapNwRfc;
 
-namespace ImageBroker.Models;
+namespace SapBroker.Models;
 
 class ResultContainer<T>
 {

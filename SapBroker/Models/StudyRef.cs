@@ -1,4 +1,4 @@
-﻿namespace ImageBroker.Models;
+﻿namespace SapBroker.Models;
 
 record StudyRef(string Ship, string Report, string FilmId, int Ser)
 {

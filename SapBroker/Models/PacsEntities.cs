@@ -1,4 +1,4 @@
-﻿namespace ImageBroker.Models;
+﻿namespace SapBroker.Models;
 
 record PacsStudy(string ComponentId, string StudyId, string AccessionNumber);
 
