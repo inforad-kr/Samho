@@ -10,7 +10,7 @@ class UploadService(ISapService sapService, IHttpClientFactory httpClientFactory
 
     public async Task<int> UploadImages(StudyRef studyRef)
     {
-        var study = new Study(studyRef.Ship, studyRef.Report, $"{studyRef.Ship}{studyRef.FilmId}_{studyRef.Ser:d3}");
+        var study = new PacsStudy(studyRef.Ship, studyRef.Report, $"{studyRef.Ship}{studyRef.FilmId}_{studyRef.Ser:d3}");
         var images = await GetImages(study);
         int fileCount = 0;
         foreach (var image in images)
@@ -28,16 +28,16 @@ class UploadService(ISapService sapService, IHttpClientFactory httpClientFactory
         return fileCount;
     }
 
-    private async Task<Image[]> GetImages(Study study) =>
-        await m_PacsClient.GetFromJsonAsync<Image[]>($"image?ComponentId={study.ComponentId}&StudyId={study.StudyId}&AccessionNumber={study.AccessionNumber}");
+    private async Task<PacsImage[]> GetImages(PacsStudy study) =>
+        await m_PacsClient.GetFromJsonAsync<PacsImage[]>($"image?ComponentId={study.ComponentId}&StudyId={study.StudyId}&AccessionNumber={study.AccessionNumber}");
 
-    private async Task<ImageFile[]> GetFiles(Image image) =>
-        await m_PacsClient.GetFromJsonAsync<ImageFile[]>($"image/{image.Id}/file");
+    private async Task<PacsFile[]> GetFiles(PacsImage image) =>
+        await m_PacsClient.GetFromJsonAsync<PacsFile[]>($"image/{image.Id}/file");
 
-    private async Task<byte[]> GetFileData(ImageFile file, bool jpeg) =>
+    private async Task<byte[]> GetFileData(PacsFile file, bool jpeg) =>
         await m_PacsClient.GetByteArrayAsync($"file/{file.Id}/data?jpeg={jpeg}");
 
-    private async Task UploadFile(Study study, Image image, bool jpeg, byte[] data)
+    private async Task UploadFile(PacsStudy study, PacsImage image, bool jpeg, byte[] data)
     {
         using var ftpClient = settings.FtpUser != "" && settings.FtpPassword != "" ?
             new AsyncFtpClient(settings.FtpHost, settings.FtpUser, settings.FtpPassword) :
