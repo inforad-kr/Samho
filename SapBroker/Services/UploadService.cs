@@ -1,8 +1,8 @@
 ﻿using FluentFTP;
-using ImageBroker.Models;
+using SapBroker.Models;
 using Serilog;
 
-namespace ImageBroker.Services;
+namespace SapBroker.Services;
 
 class UploadService(ISapService sapService, IHttpClientFactory httpClientFactory, Settings settings)
 {
