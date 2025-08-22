@@ -10,7 +10,7 @@ class UploadService(ISapService sapService, IHttpClientFactory httpClientFactory
 
     public async Task<int> UploadImages(StudyRef studyRef)
     {
-        var study = new Study(studyRef.ShipNumber, studyRef.ReportNumber, studyRef.FilmId_Series);
+        var study = new Study(studyRef.Ship, studyRef.Report, studyRef.FilmId + "_" + studyRef.Ser);
         var images = await GetImages(study);
         int fileCount = 0;
         foreach (var image in images)

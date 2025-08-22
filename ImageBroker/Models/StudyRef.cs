@@ -1,6 +1,6 @@
 ﻿namespace ImageBroker.Models;
 
-record StudyRef(string ShipNumber, string ReportNumber, string FilmId_Series)
+record StudyRef(string Ship, string Report, string FilmId, int Ser)
 {
-    public bool IsValid => !string.IsNullOrWhiteSpace(ShipNumber) && !string.IsNullOrWhiteSpace(ReportNumber) && !string.IsNullOrWhiteSpace(FilmId_Series);
+    public bool IsValid => !string.IsNullOrWhiteSpace(Ship) && !string.IsNullOrWhiteSpace(Report) && !string.IsNullOrWhiteSpace(FilmId) && Ser > 0;
 }
