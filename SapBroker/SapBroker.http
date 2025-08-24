@@ -2,3 +2,6 @@
 
 ### Get orders
 GET {{SapBroker_HostAddress}}/api/order
+
+### Upload study images
+POST {{SapBroker_HostAddress}}/api/study?ship=&report=&filmid=&ser=

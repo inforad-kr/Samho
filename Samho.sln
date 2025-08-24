@@ -5,8 +5,6 @@ VisualStudioVersion = 17.14.36109.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SapBroker", "SapBroker\SapBroker.csproj", "{83F018CB-2CF5-49A0-9D42-72B9124819EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageBroker", "ImageBroker\ImageBroker.csproj", "{401E74CC-0FD0-C41D-FDD3-08BEA22C4F32}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{83F018CB-2CF5-49A0-9D42-72B9124819EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83F018CB-2CF5-49A0-9D42-72B9124819EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83F018CB-2CF5-49A0-9D42-72B9124819EF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{401E74CC-0FD0-C41D-FDD3-08BEA22C4F32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{401E74CC-0FD0-C41D-FDD3-08BEA22C4F32}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{401E74CC-0FD0-C41D-FDD3-08BEA22C4F32}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{401E74CC-0FD0-C41D-FDD3-08BEA22C4F32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

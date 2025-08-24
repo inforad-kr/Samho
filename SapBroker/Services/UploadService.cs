@@ -1,0 +1,72 @@
+﻿using FluentFTP;
+using SapBroker.Models;
+using Serilog;
+
+namespace SapBroker.Services;
+
+class UploadService(ISapService sapService, IHttpClientFactory httpClientFactory, Settings settings)
+{
+    readonly HttpClient m_PacsClient = httpClientFactory.CreateClient("Pacs");
+
+    public async Task<int> UploadImages(StudyRef studyRef)
+    {
+        var study = new PacsStudy(studyRef.Ship, studyRef.Report, $"{studyRef.Ship}{studyRef.FilmId}_{studyRef.Ser:d3}");
+        var images = await GetImages(study);
+        int fileCount = 0;
+        foreach (var image in images)
+        {
+            var files = await GetFiles(image);
+            foreach (var file in files)
+            {
+                var data = await GetFileData(file, false);
+                await UploadFile(study, image, false, data);
+                data = await GetFileData(file, true);
+                await UploadFile(study, image, true, data);
+                ++fileCount;
+            }
+        }
+        return fileCount;
+    }
+
+    private async Task<PacsImage[]> GetImages(PacsStudy study) =>
+        await m_PacsClient.GetFromJsonAsync<PacsImage[]>($"image?ComponentId={study.ComponentId}&StudyId={study.StudyId}&AccessionNumber={study.AccessionNumber}");
+
+    private async Task<PacsFile[]> GetFiles(PacsImage image) =>
+        await m_PacsClient.GetFromJsonAsync<PacsFile[]>($"image/{image.Id}/file");
+
+    private async Task<byte[]> GetFileData(PacsFile file, bool jpeg) =>
+        await m_PacsClient.GetByteArrayAsync($"file/{file.Id}/data?jpeg={jpeg}");
+
+    private async Task UploadFile(PacsStudy study, PacsImage image, bool jpeg, byte[] data)
+    {
+        using var ftpClient = settings.FtpUser != "" && settings.FtpPassword != "" ?
+            new AsyncFtpClient(settings.FtpHost, settings.FtpUser, settings.FtpPassword) :
+            new AsyncFtpClient(settings.FtpHost);
+        await ftpClient.Connect();
+
+        var folderPath = $"/ndtfiles/images/{study.ComponentId}";
+        var fileExtension = jpeg ? "JPG" : "DCM";
+        var fileName = $"{study.ComponentId}_{study.AccessionNumber}_{image.SeriesDescription}.{fileExtension}";
+        var filePath = $"{folderPath}/{fileName}";
+
+        if (!await ftpClient.DirectoryExists(folderPath))
+        {
+            await ftpClient.CreateDirectory(folderPath);
+            Log.Information("Directory {FolderPath} created by FTP", folderPath);
+        }
+        using var dataStream = new MemoryStream(data);
+        var status = await ftpClient.UploadStream(dataStream, filePath);
+        Log.Information("File {FilePath} uploaded by FTP with status {Status}", filePath, status);
+
+        var fileParameters = new FileParameters
+        {
+            ShipNumber = study.ComponentId,
+            ReportNumber = study.StudyId,
+            FilmId_Series = study.AccessionNumber[4..],
+            Location = image.SeriesDescription,
+            VerificationCode = image.ProtocolName,
+            FileName = fileName
+        };
+        sapService.NotifyFile(fileParameters);
+    }
+}

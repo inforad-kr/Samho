@@ -27,4 +27,14 @@ class SapService : ISapService, IDisposable
         var result = func.Invoke<ArrayResultContainer<Order>>(parameters);
         return result.Result;
     }
+
+    public void NotifyFile(FileParameters parameters)
+    {
+        using var func = m_Connection.CreateFunction("Z_QMSA_12_0016_SET");
+        var result = func.Invoke<ResultContainer<string>>(parameters);
+        if (result.Result != "S")
+        {
+            throw new InvalidOperationException($"{func.Metadata.GetName} returns {result.Result}");
+        }
+    }
 }

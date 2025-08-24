@@ -1,4 +1,5 @@
 ﻿using SapBroker.Models;
+using Serilog;
 
 namespace SapBroker.Services;
 
@@ -26,5 +27,19 @@ class SapEmulator : ISapService
             };
             yield return order;
         }
+    }
+
+    public void NotifyFile(FileParameters parameters)
+    {
+        Log.Information("Notify SAP about file {Parameters}", new
+        {
+            parameters.ShipNumber,
+            parameters.ReportNumber,
+            parameters.FilmId,
+            parameters.FilmSeries,
+            parameters.Location,
+            parameters.VerificationCode,
+            parameters.FileName
+        });
     }
 }
