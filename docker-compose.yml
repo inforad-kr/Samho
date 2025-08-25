@@ -1,0 +1,6 @@
+services:
+  sapbroker:
+    image: ${DOCKER_REGISTRY-}sapbroker
+    build:
+      context: .
+      dockerfile: SapBroker/Dockerfile
